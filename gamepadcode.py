@@ -104,6 +104,7 @@ class GamePadBase(object):
                 EVENT_SIZE = struct.calcsize("LhBB")
                 file = open(infile_path, "rb")
                 event = file.read(EVENT_SIZE)
+                self.status["connected"] = True
                 while event:
                     #print(struct.unpack("LhBB", event))
                     (tv_msec,  value, type, number) = struct.unpack("LhBB", event)
@@ -172,13 +173,15 @@ class GamePadBase(object):
 
                     event = file.read(EVENT_SIZE)
             except Exception as e:
-                file.close()
+                time.sleep(0.2)
+                self.status["connected"] = False
 
 
     def __init__(self, input="/dev/input/js0"):
 
         self.printing = False
         self.status = {
+            "connected": False,
             "v_dir": 0,
             "h_dir": 0,
             "A": 0,
@@ -190,6 +193,7 @@ class GamePadBase(object):
             "SELECT": 0,
             "START": 0
         }
+
         self.input = input
         self.thread = threading.Thread(target=self.contoller_loop)
         self.thread.daemon = True
