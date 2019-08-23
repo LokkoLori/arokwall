@@ -158,7 +158,7 @@ def snakesinit():
     snakes[1].b = 255
 
     snakes[1].x_pos = wall.width - 4
-    snakes[1].y_pos = wall.height - 3
+    snakes[1].y_pos = wall.height - 2
     snakes[1].x_velo = 0
     snakes[1].y_velo = 0
     snakes[1].hp = 100
@@ -178,7 +178,7 @@ def snakesinit():
     snakes[3].b = 255
 
     snakes[3].x_pos = wall.width - 4
-    snakes[3].y_pos = 2
+    snakes[3].y_pos = 3
     snakes[3].x_velo = 0
     snakes[3].y_velo = 0
     snakes[3].hp = 100
@@ -294,8 +294,9 @@ if __name__ == '__main__':
 
             happyrun -= 1
             if happyrun == 0:
-                snakesinit()
                 rollo(winner.r, winner.g, winner.b)
+                snakesinit()
+                continue
 
         if 1 < actsnakes_count:
             #snakebites
@@ -330,8 +331,8 @@ if __name__ == '__main__':
 
             if len(standings) == 0:
                 #tie
-                snakesinit()
                 rollo(255, 0, 0)
+                snakesinit()
                 continue
 
 
